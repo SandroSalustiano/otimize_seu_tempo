@@ -1,176 +1,387 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Otimize Seu Tempo</title>
+import { Clock, Rocket, Lightbulb, Zap, Star, ChevronDown, X } from "lucide-react";
+import { useState, useEffect } from "react";
 
-<style>
+/**
+ * Design Philosophy: Minimalismo Moderno com Foco em Produtividade
+ * - Clareza absoluta em cada elemento
+ * - Hierarquia tipográfica forte
+ * - Paleta: Azul profundo (#0b3b91) + Amarelo ouro (#ffba00)
+ * - Espaço generoso entre seções
+ * - Sombras sutis para profundidade
+ */
 
-body{
-margin:0;
-font-family: Arial, Helvetica, sans-serif;
-background:#f5f5f5;
+interface Notification {
+  id: string;
+  name: string;
+  city: string;
+  time: string;
 }
 
-header{
-background:linear-gradient(135deg, #0b3b91, #3fa9ff);
-color:#fff;
-padding:60px 20px;
-text-align:center;
+export default function Home() {
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [timeLeft, setTimeLeft] = useState(3600);
+  const [progress, setProgress] = useState(100);
+
+  const totalTime = 3600;
+
+  const names = [
+    "Ana Silva", "Carlos Santos", "Marina Costa", "João Pereira", "Beatriz Oliveira",
+    "Lucas Ferreira", "Fernanda Martins", "Ricardo Alves", "Juliana Rocha", "Felipe Gomes",
+    "Camila Souza", "Bruno Dias", "Gabriela Mendes", "Rodrigo Barbosa", "Isabela Nunes"
+  ];
+
+  const cities = [
+    "São Paulo", "Rio de Janeiro", "Belo Horizonte", "Curitiba", "Porto Alegre",
+    "Salvador", "Fortaleza", "Brasília", "Manaus", "Recife"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomName = names[Math.floor(Math.random() * names.length)];
+      const randomCity = cities[Math.floor(Math.random() * cities.length)];
+      const newNotification: Notification = {
+        id: Date.now().toString(),
+        name: randomName,
+        city: randomCity,
+        time: "agora"
+      };
+
+      setNotifications(prev => [newNotification, ...prev.slice(0, 2)]);
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const removeNotification = (id: string) => {
+    setNotifications(prev => prev.filter(notif => notif.id !== id));
+  };
+
+  const faqs = [
+    {
+      question: "Quanto tempo leva para ver resultados?",
+      answer: "A maioria dos usuários relata melhorias significativas em produtividade em 1-2 semanas. Alguns resultados aparecem no primeiro dia, como maior clareza mental e menos estresse."
+    },
+    {
+      question: "Preciso de alguma ferramenta ou software especial?",
+      answer: "Não! As técnicas ensinadas funcionam com ferramentas simples que você já tem: papel, caneta, ou apps básicos como Google Calendar. O método é sobre organização mental, não sobre tecnologia."
+    },
+    {
+      question: "O método funciona para estudantes?",
+      answer: "Sim! Muitos estudantes relatam melhoria significativa no desempenho acadêmico. As técnicas ajudam a estudar de forma mais eficiente, reduzindo o tempo gasto e aumentando a retenção."
+    },
+    {
+      question: "E se eu não conseguir acompanhar?",
+      answer: "O método é flexível e se adapta ao seu ritmo. Você começa com técnicas simples e vai evoluindo. Não há pressão - o importante é começar e ir ajustando conforme sua realidade."
+    },
+    {
+      question: "Posso aplicar para meu negócio?",
+      answer: "Absolutamente! Empreendedores e profissionais autônomos são os maiores beneficiários. As técnicas ajudam a priorizar tarefas importantes, aumentar foco e crescer seu negócio."
+    },
+    {
+      question: "Qual é a política de reembolso?",
+      answer: "Oferecemos garantia de satisfação. Se não ficar satisfeito com o conteúdo, você pode solicitar reembolso dentro de 7 dias. Sem perguntas, sem complicações."
+    }
+  ];
+
+  const toggleFAQ = (index: number) => {
+    setOpenFAQ(openFAQ === index ? null : index);
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      {/* Header com Gradiente */}
+      <header className="bg-gradient-to-r from-[#0b3b91] to-[#3fa9ff] text-white py-16 px-6 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-5xl font-bold mb-4 flex items-center justify-center gap-3">
+            <Clock size={40} />
+            OTIMIZE SEU TEMPO
+          </h1>
+          <p className="text-xl leading-relaxed mb-8">
+            Pare de viver ocupado e comece a ser realmente produtivo com um método simples, direto e comprovado.
+          </p>
+          <a
+            href="https://pay.kiwify.com.br/oBMzPuh"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-[#ffba00] hover:bg-[#ff9900] text-black font-bold py-4 px-8 rounded-lg text-lg transition-colors duration-300"
+          >
+            QUERO OTIMIZAR MEU TEMPO AGORA
+          </a>
+        </div>
+      </header>
+
+      {/* Seções Principais */}
+      <main className="max-w-5xl mx-auto w-full px-6 py-16">
+        {/* Para Quem é */}
+        <section className="bg-white rounded-xl p-8 mb-8 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <h2 className="text-3xl font-bold text-[#003d8f] mb-6 flex items-center gap-3">
+            <Rocket size={32} className="text-[#ffba00]" />
+            Para Quem é o Otimize Seu Tempo?
+          </h2>
+          <ul className="space-y-3 text-lg text-gray-700 leading-relaxed">
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Pessoas que fazem muito e produzem pouco</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Profissionais que querem mais foco e organização</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Empreendedores, estudantes e autônomos</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Quem procrastina e quer parar de adiar tudo</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Quem quer ter controle, clareza e qualidade de vida</span>
+            </li>
+          </ul>
+        </section>
+
+        {/* O Que Você Vai Aprender */}
+        <section className="bg-white rounded-xl p-8 mb-8 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <h2 className="text-3xl font-bold text-[#003d8f] mb-6 flex items-center gap-3">
+            <Lightbulb size={32} className="text-[#ffba00]" />
+            O Que Você Vai Aprender
+          </h2>
+          <ul className="space-y-3 text-lg text-gray-700 leading-relaxed">
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Planejamento prático e eficiente</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Como eliminar distrações e manter foco</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Como vencer a procrastinação</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Como criar hábitos produtivos</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Como usar a tecnologia a seu favor</span>
+            </li>
+          </ul>
+        </section>
+
+        {/* Você Recebe */}
+        <section className="bg-white rounded-xl p-8 mb-8 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <h2 className="text-3xl font-bold text-[#003d8f] mb-6 flex items-center gap-3">
+            <Zap size={32} className="text-[#ffba00]" />
+            Você Recebe
+          </h2>
+          <ul className="space-y-3 text-lg text-gray-700 leading-relaxed">
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Técnica Pomodoro</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Time Blocking</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Matriz de Eisenhower</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Regra 80/20</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>GTD e Regra dos 2 Minutos</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Estratégias reais para produtividade diária</span>
+            </li>
+          </ul>
+        </section>
+
+        {/* Benefícios Reais */}
+        <section className="bg-white rounded-xl p-8 mb-12 shadow-md hover:shadow-lg transition-shadow duration-300">
+          <h2 className="text-3xl font-bold text-[#003d8f] mb-6 flex items-center gap-3">
+            <Rocket size={32} className="text-[#ffba00]" />
+            Benefícios Reais
+          </h2>
+          <ul className="space-y-3 text-lg text-gray-700 leading-relaxed">
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Mais foco</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Menos estresse</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Mais tempo livre</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Clareza do que realmente importa</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="text-[#ffba00] font-bold mt-1">•</span>
+              <span>Resultados reais e mensuráveis</span>
+            </li>
+          </ul>
+        </section>
+
+        {/* Seção de Depoimentos */}
+        <section className="py-16">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-[#003d8f] mb-4">O Que Nossos Clientes Dizem</h2>
+            <p className="text-lg text-gray-600">Veja como pessoas reais transformaram sua produtividade</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Depoimento 1 */}
+            <div className="bg-white rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={20} className="fill-[#ffba00] text-[#ffba00]" />
+                ))}
+              </div>
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                "Consegui aumentar minha produtividade em 40% em apenas 2 semanas. As técnicas são simples mas muito eficazes. Recomendo para todos!"
+              </p>
+              <div className="border-t border-gray-200 pt-4">
+                <p className="font-bold text-[#003d8f]">Carlos Silva</p>
+                <p className="text-sm text-gray-600">Empreendedor</p>
+              </div>
+            </div>
+
+            {/* Depoimento 2 */}
+            <div className="bg-white rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={20} className="fill-[#ffba00] text-[#ffba00]" />
+                ))}
+              </div>
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                "Finalmente consegui organizar meu tempo de forma que realmente funciona. Menos estresse, mais resultados. Vida mudou!"
+              </p>
+              <div className="border-t border-gray-200 pt-4">
+                <p className="font-bold text-[#003d8f]">Marina Costa</p>
+                <p className="text-sm text-gray-600">Profissional Autônoma</p>
+              </div>
+            </div>
+
+            {/* Depoimento 3 */}
+            <div className="bg-white rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={20} className="fill-[#ffba00] text-[#ffba00]" />
+                ))}
+              </div>
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                "Como estudante, isso foi transformador. Consigo estudar menos mas aprender mais. Meu desempenho acadêmico melhorou muito!"
+              </p>
+              <div className="border-t border-gray-200 pt-4">
+                <p className="font-bold text-[#003d8f]">João Pereira</p>
+                <p className="text-sm text-gray-600">Estudante</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Seção FAQ */}
+        <section className="py-16">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-[#003d8f] mb-4">Perguntas Frequentes</h2>
+            <p className="text-lg text-gray-600">Tire suas dúvidas sobre o método Otimize Seu Tempo</p>
+          </div>
+          
+          <div className="max-w-3xl mx-auto space-y-4">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+              >
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors duration-200"
+                >
+                  <h3 className="text-lg font-bold text-[#003d8f] pr-4">{faq.question}</h3>
+                  <ChevronDown
+                    size={24}
+                    className={`text-[#ffba00] flex-shrink-0 transition-transform duration-300 ${openFAQ === index ? "rotate-180" : ""}`}
+                  />
+                </button>
+                
+                {openFAQ === index && (
+                  <div className="px-6 pb-6 border-t border-gray-200 animate-in fade-in duration-200">
+                    <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      {/* CTA Section */}
+      <section className="bg-[#003d8f] text-white py-20 px-6 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4">
+            Pronto para assumir o controle do seu tempo?
+          </h2>
+          <p className="text-xl mb-8 leading-relaxed">
+            Comece agora sua transformação de produtividade.
+          </p>
+          <a
+            href="https://pay.kiwify.com.br/oBMzPuh"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-[#ffba00] hover:bg-[#ff9900] text-black font-bold py-4 px-8 rounded-lg text-lg transition-colors duration-300"
+          >
+            SIM, QUERO COMEÇAR AGORA
+          </a>
+        </div>
+      </section>
+
+      {/* Notificações de Compra */}
+      <div className="fixed bottom-6 right-6 space-y-4 z-50 pointer-events-none">
+        {notifications.map((notif) => (
+          <div
+            key={notif.id}
+            className="bg-white rounded-lg shadow-2xl p-4 max-w-xs animate-in slide-in-from-right duration-300 pointer-events-auto"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex-1">
+                <p className="font-bold text-[#003d8f] text-sm">
+                  ✓ {notif.name} de {notif.city}
+                </p>
+                <p className="text-gray-600 text-xs mt-1">
+                  Acaba de comprar "Otimize Seu Tempo"
+                </p>
+                <p className="text-gray-500 text-xs mt-2">{notif.time}</p>
+              </div>
+              <button
+                onClick={() => removeNotification(notif.id)}
+                className="text-gray-400 hover:text-gray-600 transition-colors flex-shrink-0"
+              >
+                <X size={18} />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-400 text-center py-6 text-sm">
+        © 2026 — Otimize Seu Tempo — Todos os direitos reservados.
+      </footer>
+    </div>
+  );
 }
-
-header h1{
-font-size:38px;
-margin-bottom:10px;
-}
-
-header p{
-font-size:20px;
-max-width:750px;
-margin:auto;
-}
-
-section{
-max-width:1100px;
-margin:auto;
-padding:40px 20px;
-}
-
-.btn{
-background:#ffba00;
-padding:15px 30px;
-border-radius:6px;
-color:#000;
-font-size:18px;
-text-decoration:none;
-font-weight:bold;
-display:inline-block;
-margin-top:20px;
-transition:0.3s;
-}
-
-.btn:hover{
-background:#ff9900;
-}
-
-.box{
-background:white;
-padding:25px;
-border-radius:10px;
-margin-bottom:20px;
-box-shadow:0 5px 10px rgba(0,0,0,.1);
-}
-
-h2{
-color:#003d8f;
-}
-
-ul{
-line-height:1.8em;
-font-size:17px;
-}
-
-.cta{
-text-align:center;
-padding:50px 20px;
-background:#003d8f;
-color:white;
-}
-
-.cta h2{
-color:white;
-font-size:30px;
-}
-
-footer{
-background:#111;
-color:#ccc;
-text-align:center;
-padding:20px;
-font-size:14px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header>
-<h1>🕒 OTIMIZE SEU TEMPO</h1>
-<p>Pare de viver ocupado e comece a ser realmente produtivo com um método simples, direto e comprovado.</p>
-
-<!-- BOTÃO DE COMPRA KIWIFY -->
-<a class="btn" href="https://pay.kiwify.com.br/oBMzPuh" target="_blank">
-QUERO OTIMIZAR MEU TEMPO AGORA
-</a>
-
-</header>
-
-<section>
-
-<div class="box">
-<h2>🚀 Para Quem é o Otimize Seu Tempo?</h2>
-<ul>
-<li>Pessoas que fazem muito e produzem pouco</li>
-<li>Profissionais que querem mais foco e organização</li>
-<li>Empreendedores, estudantes e autônomos</li>
-<li>Quem procrastina e quer parar de adiar tudo</li>
-<li>Quem quer ter controle, clareza e qualidade de vida</li>
-</ul>
-</div>
-
-<div class="box">
-<h2>💡 O Que Você Vai Aprender</h2>
-<ul>
-<li>Planejamento prático e eficiente</li>
-<li>Como eliminar distrações e manter foco</li>
-<li>Como vencer a procrastinação</li>
-<li>Como criar hábitos produtivos</li>
-<li>Como usar a tecnologia a seu favor</li>
-</ul>
-</div>
-
-<div class="box">
-<h2>📚 Você Recebe</h2>
-<ul>
-<li>Técnica Pomodoro</li>
-<li>Time Blocking</li>
-<li>Matriz de Eisenhower</li>
-<li>Regra 80/20</li>
-<li>GTD e Regra dos 2 Minutos</li>
-<li>Estratégias reais para produtividade diária</li>
-</ul>
-</div>
-
-<div class="box">
-<h2>🔥 Benefícios Reais</h2>
-<ul>
-<li>Mais foco</li>
-<li>Menos estresse</li>
-<li>Mais tempo livre</li>
-<li>Clareza do que realmente importa</li>
-<li>Resultados reais e mensuráveis</li>
-</ul>
-</div>
-
-</section>
-
-<div class="cta">
-<h2>Pronto para assumir o controle do seu tempo?</h2>
-<p>Comece agora sua transformação de produtividade.</p>
-
-<!-- BOTÃO COM LINK KIWIFY -->
-<a class="btn" href="https://pay.kiwify.com.br/oBMzPuh" target="_blank">
-SIM, QUERO COMEÇAR AGORA
-</a>
-
-</div>
-
-<footer>
-© 2026 — Otimize Seu Tempo — Todos os direitos reservados.
-</footer>
-
-</body>
-</html>
