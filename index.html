@@ -1,12 +1,151 @@
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
-import ErrorBoundary from "./components/ErrorBoundary";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otimize Seu Tempo, Maximize Sua Vida</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 0;
+        }
+        .header h1 {
+            font-size: 2.8em;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+        .header .subtitle {
+            font-size: 1.4em;
+            color: #555;
+        }
+        .cover {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .cover img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .section {
+            background-color: #fff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            font-size: 2em;
+            color: #1a1a1a;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%23007bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>') no-repeat left center;
+            padding-left: 35px;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .cta-button {
+            display: block;
+            width: 100%;
+            background-color: #28a745;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 5px 10px rgba(40, 167, 69, 0.3);
+        }
+        .cta-button:hover {
+            background-color: #218838;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
 
+    <div class="container">
 
+        <div class="header">
+            <h1>Cansado de Correr o Dia Todo e Não Sair do Lugar?</h1>
+            <p class="subtitle">Descubra o segredo para ter mais foco, realizar mais e finalmente assumir o controle do seu tempo.</p>
+        </div>
+
+        <div class="cover">
+            <img src="CAPA.webp" alt="Capa do E-book Otimize Seu Tempo, Maximize Sua Vida">
+        </div>
+
+        <div class="section">
+            <h2>Você se sente sobrecarregado, ansioso e improdutivo?</h2>
+            <p>Você termina o dia com a sensação de que "apagou incêndios" mas não avançou nos seus projetos mais importantes? A lista de tarefas parece nunca diminuir? Você procrastina, se distrai facilmente e sente que seu potencial está sendo desperdiçado?</p>
+            <p>Se você respondeu "sim" a alguma dessas perguntas, saiba que não está sozinho. A sociedade moderna nos empurra para um estado de "ocupação" constante, mas isso raramente se traduz em resultados reais. </p>
+            <p><strong>A boa notícia é que existe um caminho.</strong> Um método comprovado para transformar o caos em clareza, a ansiedade em realização e o tempo perdido em progresso significativo.</p>
+        </div>
+
+        <div class="section">
+            <h2>Apresentando: Otimize Seu Tempo, Maximize Sua Vida</h2>
+            <p>Este não é apenas mais um e-book sobre produtividade. É um guia prático e direto ao ponto, criado para reprogramar sua mente e seus hábitos, permitindo que você alcance o máximo de performance com o mínimo de estresse.</p>
+            <p>Com ele, você vai parar de ser uma vítima do seu tempo e se tornar o mestre dele.</p>
+        </div>
+
+        <div class="section">
+            <h2>O Que Você Vai Aprender:</h2>
+            <ul>
+                <li>A devastadora diferença entre "estar ocupado" e "ser produtivo".</li>
+                <li>Como encontrar seu "horário nobre" para realizar suas tarefas mais importantes com o dobro de eficiência.</li>
+                <li>A definir metas do jeito certo com o método SMART, transformando sonhos em planos de ação.</li>
+                <li>Técnicas de priorização matadoras (Matriz de Eisenhower, 80/20, Eat the Frog) para focar no que realmente importa.</li>
+                <li>O poder da Técnica Pomodoro, Time Blocking e Timeboxing para manter o foco absoluto.</li>
+                <li>Estratégias para otimizar seu fluxo de trabalho, como agrupar tarefas (Batching) e a Regra dos 2 Minutos.</li>
+                <li>Como usar a tecnologia como sua aliada, não como sua maior distração.</li>
+                <li>O passo a passo para construir hábitos de produtividade que duram a vida toda.</li>
+                <li>Técnicas comprovadas para vencer a procrastinação e eliminar as distrações de uma vez por todas.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+             <h2>Adquira sua cópia agora e transforme sua vida!</h2>
+             <a href="https://pay.kiwify.com.br/qeCLe1g" class="cta-button">QUERO TER MAIS TEMPO E FOCO!</a>
+             <p style="text-align: center; margin-top: 15px; font-size: 0.9em; color: #555;">Compra segura e acesso imediato.</p>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Seu Nome ou Sua Marca. Todos os direitos reservados.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
 function Router() {
   return (
     <Switch>
