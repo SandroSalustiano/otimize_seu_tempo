@@ -4,94 +4,243 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Otimize Seu Tempo, Maximize Sua Vida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #007bff;
+            --success: #28a745;
+            --success-hover: #218838;
+            --text-main: #1a1a1a;
+            --text-secondary: #555;
+            --bg-body: #f4f7f6;
+            --bg-card: #ffffff;
+        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
+            color: var(--text-main);
+            background-color: var(--bg-body);
             margin: 0;
             padding: 0;
+            -webkit-font-smoothing: antialiased;
         }
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
         }
         .header {
             text-align: center;
-            padding: 40px 0;
+            padding: 60px 0 40px;
         }
         .header h1 {
-            font-size: 2.8em;
-            color: #1a1a1a;
-            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
         }
         .header .subtitle {
-            font-size: 1.4em;
-            color: #555;
+            font-size: 1.25em;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
         }
         .cover {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
         .cover img {
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            transition: transform 0.3s ease;
+        }
+        .cover img:hover {
+            transform: translateY(-5px);
         }
         .section {
-            background-color: #fff;
-            padding: 30px;
+            background-color: var(--bg-card);
+            padding: 40px;
             margin-bottom: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02), 0 10px 15px rgba(0,0,0,0.05);
         }
         .section h2 {
-            font-size: 2em;
-            color: #1a1a1a;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            font-size: 1.75em;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        .section h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
         }
         ul {
             list-style: none;
             padding: 0;
         }
         ul li {
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%23007bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>') no-repeat left center;
-            padding-left: 35px;
-            font-size: 1.1em;
-            margin-bottom: 15px;
+            position: relative;
+            padding-left: 32px;
+            font-size: 1.05em;
+            margin-bottom: 16px;
+            color: #444;
+        }
+        ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%23007bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
         }
         .cta-button {
             display: block;
             width: 100%;
-            background-color: #28a745;
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
             color: #fff;
             text-align: center;
-            padding: 20px;
-            font-size: 1.5em;
-            font-weight: bold;
+            padding: 22px;
+            font-size: 1.25em;
+            font-weight: 700;
             text-decoration: none;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 5px 10px rgba(40, 167, 69, 0.3);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .cta-button:hover {
-            background-color: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(40, 167, 69, 0.35);
         }
         .footer {
             text-align: center;
-            margin-top: 40px;
-            padding: 20px;
+            margin-top: 60px;
+            padding: 30px 0;
             font-size: 0.9em;
-            color: #777;
+            color: #999;
+            border-top: 1px solid #eaeaea;
+        }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 2em; }
+            .section { padding: 25px; }
+            .cta-button { font-size: 1.1em; padding: 18px; }
+        }
+
+        /* Preço */
+        .price-container {
+            text-align: center;
+            margin: 20px 0 30px;
+        }
+        .price-old {
+            display: block;
+            font-size: 1.2em;
+            color: #999;
+            text-decoration: line-through;
+        }
+        .price-new {
+            font-size: 3.5em;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.1;
+        }
+        /* Barra de Urgência */
+        .urgency-bar {
+            background: linear-gradient(90deg, #e02020, #fa5252);
+            color: #fff;
+            text-align: center;
+            padding: 12px 20px;
+            font-weight: 600;
+            font-size: 0.95em;
+            position: sticky;
+            top: 0;
+            z-index: 1100;
+            box-shadow: 0 4px 12px rgba(224, 32, 32, 0.2);
+        }
+        .timer-box {
+            background: rgba(0, 0, 0, 0.15);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-variant-numeric: tabular-nums;
+            font-weight: 700;
+            margin-left: 8px;
+            letter-spacing: 1px;
+        }
+
+        /* Estilos da Notificação de Venda */
+        .notification-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            transform: translateY(150%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 320px;
+            border-left: 4px solid var(--success);
+        }
+        .notification-toast.show {
+            transform: translateY(0);
+        }
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #e8f5e9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--success);
+            flex-shrink: 0;
+        }
+        .notification-content p {
+            margin: 0;
+            font-size: 0.9em;
+            line-height: 1.3;
+            color: var(--text-main);
+        }
+        .notification-content span {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+        }
+        @media (max-width: 600px) {
+            .notification-toast {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                max-width: none;
+            }
         }
     </style>
 </head>
 <body>
+
+    <div class="urgency-bar">
+        🔥 ATENÇÃO: O preço promocional encerra em <span id="countdown-timer" class="timer-box">60:00</span>
+    </div>
 
     <div class="container">
 
@@ -101,7 +250,7 @@
         </div>
 
         <div class="cover">
-            <img src="CAPA.webp" alt="Capa do E-book Otimize Seu Tempo, Maximize Sua Vida">
+            <img src="modulo 1.png" alt="Capa do E-book Otimize Seu Tempo, Maximize Sua Vida">
         </div>
 
         <div class="section">
@@ -134,45 +283,85 @@
 
         <div class="section">
              <h2>Adquira sua cópia agora e transforme sua vida!</h2>
-             <a href="https://pay.kiwify.com.br/qeCLe1g" class="cta-button">QUERO TER MAIS TEMPO E FOCO!</a>
+             <div class="price-container">
+                 <span class="price-old">De R$ 97,00</span>
+                 <span class="price-new">R$ 47,00</span>
+             </div>
+             <a href="https://pay.kiwify.com.br/oBMzPuh" class="cta-button">QUERO TER MAIS TEMPO E FOCO!</a>
              <p style="text-align: center; margin-top: 15px; font-size: 0.9em; color: #555;">Compra segura e acesso imediato.</p>
         </div>
 
         <div class="footer">
-            <p>&copy; 2025 Seu Nome ou Sua Marca. Todos os direitos reservados.</p>
+            <p>&copy; 2025 Sandro Salustiano. Todos os direitos reservados.</p>
         </div>
 
     </div>
 
+    <!-- Notificação de Venda -->
+    <div id="notification-toast" class="notification-toast">
+        <div class="notification-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <div class="notification-content">
+            <p><strong><span id="buyer-name">Nome</span></strong> comprou o e-book!</p>
+            <span id="buyer-location">Localização</span>
+        </div>
+    </div>
+
+    <script>
+        const names = ['Ana P.', 'Carlos M.', 'Fernanda S.', 'João D.', 'Mariana L.', 'Rafael G.', 'Beatriz C.', 'Lucas R.', 'Juliana M.', 'Pedro H.'];
+        const locations = ['São Paulo, SP', 'Rio de Janeiro, RJ', 'Belo Horizonte, MG', 'Curitiba, PR', 'Porto Alegre, RS', 'Salvador, BA', 'Brasília, DF', 'Recife, PE'];
+        
+        const toast = document.getElementById('notification-toast');
+        const nameSpan = document.getElementById('buyer-name');
+        const locationSpan = document.getElementById('buyer-location');
+
+        function showNotification() {
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+            nameSpan.textContent = randomName;
+            locationSpan.textContent = randomLocation;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 4000); // Fica visível por 4s
+            setTimeout(showNotification, Math.random() * (20000 - 10000) + 10000); // Repete entre 10s e 20s
+        }
+        setTimeout(showNotification, 5000); // Primeira notificação após 5s
+
+        // Timer de Urgência
+        function startTimer(duration, display) {
+            let timer = duration;
+            
+            // Verifica se existe um tempo de término salvo na sessão (sobrevive ao refresh, limpa ao fechar)
+            const savedEndTime = sessionStorage.getItem('urgency_timer_end');
+            const now = Date.now();
+
+            if (savedEndTime && savedEndTime > now) {
+                timer = Math.floor((savedEndTime - now) / 1000);
+            } else {
+                const endTime = now + (duration * 1000);
+                sessionStorage.setItem('urgency_timer_end', endTime);
+            }
+
+            function updateDisplay(t) {
+                let minutes = parseInt(t / 60, 10);
+                let seconds = parseInt(t % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = minutes + ":" + seconds;
+            }
+
+            updateDisplay(timer);
+
+            setInterval(function () {
+                if (--timer < 0) {
+                    timer = duration;
+                    // Reinicia o tempo na sessão também se o contador zerar
+                    sessionStorage.setItem('urgency_timer_end', Date.now() + (duration * 1000));
+                }
+                updateDisplay(timer);
+            }, 1000);
+        }
+        startTimer(60 * 60, document.querySelector('#countdown-timer')); // 1 hora
+    </script>
 </body>
 </html>
-function Router() {
-  return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
-  );
-}
-
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
-function App() {
-  return (
-    <ErrorBoundary>
-      <ThemeProvider defaultTheme="light">
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
-  );
-}
-
-export default App;
